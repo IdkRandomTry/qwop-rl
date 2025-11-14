@@ -1,0 +1,102 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Training Data & Logs
+data/
+logs/
+tensorboard/
+wandb/
+*.log
+
+# Models (large files)
+models/
+*.zip
+*.h5
+*.pkl
+*.pth
+*.pt
+*.ckpt
+
+# Pretrained data (can be large)
+pretrain/*.npz
+
+# TensorBoard events
+events.out.tfevents.*
+
+# Browser/Selenium artifacts
+*.crx
+geckodriver.log
+chromedriver.log
+selenium-debug.log
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.cache
+
+# Environment variables
+.env
+.env.local
+
+# Compiled JavaScript (if regenerating)
+*.min.js.map
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
