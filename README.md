@@ -1,122 +1,50 @@
 # QWOP Reinforcement Learning Project
 
-A reinforcement learning project for training an agent to play QWOP using qwop-gym and Stable Baselines3.
+## Motivation
+- Play qwop here > add link
+- Controls are unintuitive for humans. Hence we find it hard to progress in first try. We didn't even properly understand what the buttons did. It was frustrating to play.
+- Hence we believed it was a good game to test out knowledge of RL
 
-## Setup Instructions
+## Gymnasium Wrapper for QWOP
+- See github here > add link
+- What is gymnasium
+- What does the qwop wrapper do?
+  We decided to explore the available qwop wrapper. You can see our experiments in the jupyter notebook labelled: [understanding_QWOP_gym.ipynb](My-RL/understanding_QWOP_gym.ipynb). We found it gave us access to the following
+  - Environment
+    - Browser Game
+    - ChromeDriver
+    - Lot of information 
+  - Actions:
+    - all combinations of Q,W,O,P
+  - Default reward
+    - ds/dt - dt > unpack
 
-### 1. Create Virtual Environment
+## Policy Gradient (Proximal Policy Optimization, an Actor Critic algorithm)
+Why PPO? Continuous input and discrete output.
 
-```bash
-# Navigate to the QWOP directory
-cd "c:\Sidd all in one\CSE is Ez\FAI\QWOP"
+We used PPO by using the stable baseline library you can find the training cod [here](My-RL/playground.ipynb). It performed decently. You can see the result in the first cell of [showcase.ipynb](My-RL/showcase.ipynb). We noticed an interesting issue. We trained the model for some 'n' episodes. However due to the failure prone nature of the game, the model did not learn a lot from many episodes. Hence we decided to train the model for 'n' steps as a step (or a play) is a much more direct indicator of much a model has "learnt". We also implemented our own PPO algorithm. It performed better than the stable baseline's PPO reaching the finish line consistently! (NOTE: A likely reason is that we trained the custor PPO algorithm for longer :P). 
 
-# Create virtual environment
-python -m venv .venv
+<video controls src="../../../../Users/Siddhesh/Downloads/QWOP-100m.mp4" title="QWOP-100m"></video>
 
-# Activate virtual environment (Windows PowerShell):
-.\.venv\Scripts\Activate.ps1
+## Double QN
+Not done yet
 
-# Or Command Prompt:
-.\.venv\Scripts\activate.bat
-```
+## Deep QN 
+Not done yet
 
-### 2. Install Dependencies
+## "Knee Scraping"
+what is knee scraping? (a video)
+A more stable but slow strategy.
+Common in a lot of resources we referred.
+What to do?
 
-```bash
-pip install -r requirements.txt
-```
+## Penalty for Low Torso
+<video controls src="QWOP-Trying to Stand.mp4" title="Title"></video>
+A "patch" for encouraging the model to learn to "stride" was to impose a penalty when the torso is below a threshold. The penalty was a ReLU function of the models torso_y level. This encouraged the model to stand up but resulted in early terminations and terrible starting moves (failure at ~0m)
 
-### 3. Setup qwop-gym
+## Custom Rewards
+The above modification in the reward was a "patch" and did not go deep into understanding how the existing reward system works and if we could engineer a better reward system to encourage the model to stride. We noticed that the environment provided us with a lot off information which was not being used to its full potential. Hence we tried some custom reward functions!
+-Still to do
 
-The project uses [qwop-gym](https://github.com/smanolloff/qwop-gym) environment. After installation, patch the QWOP game:
-
-```bash
-# Download and patch QWOP.min.js
-(Invoke-WebRequest https://www.foddy.net/QWOP.min.js).Content | qwop-gym patch
-```
-
-### 4. Configure Browser Paths
-
-Update the browser and ChromeDriver paths in your code:
-- **Browser**: Path to Chrome/Brave executable (e.g., `C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe`)
-- **Driver**: Path to ChromeDriver executable (e.g., `C:\Program Files\chromedriver-win64\chromedriver-win64\chromedriver.exe`)
-
-Download ChromeDriver from: https://sites.google.com/chromium.org/driver/
-
-## Project Structure
-
-```
-QWOP/
-├── My-RL/
-│   ├── playground.ipynb    # Interactive testing and experimentation
-│   ├── main.py             # Main training script (to be implemented)
-│   ├── QWOP.min.js         # Patched QWOP game file
-│   └── game/               # Game assets and environment files
-├── QWOP-RL-Reference/      # Reference implementation
-├── requirements.txt        # Python dependencies
-├── .venv/                  # Virtual environment
-└── README.md              # This file
-```
-
-## Usage
-
-### Interactive Testing (Jupyter Notebook)
-
-Open `My-RL/playground.ipynb` to:
-- Test the QWOP environment
-- Run random actions
-- Visualize game statistics
-- Experiment with different configurations
-
-### Training (To be implemented)
-
-```bash
-cd My-RL
-python main.py
-```
-
-## Key Dependencies
-
-- **qwop-gym**: Gymnasium environment for QWOP game
-- **gymnasium**: OpenAI's toolkit for RL environments
-- **stable-baselines3**: High-quality RL algorithm implementations
-- **numpy**: Numerical computing
-- **tensorflow**: Deep learning framework
-- **selenium**: Web browser automation
-- **pynput**: Keyboard control
-
-## QWOP Environment
-
-The qwop-gym environment provides:
-- **Action Space**: 16 discrete actions (key combinations of Q, W, O, P)
-  - 0: none, 1: Q, 2: W, 3: O, 4: P
-  - 5: Q+W, 6: Q+O, 7: Q+P, 8: W+O, 9: W+P, 10: O+P
-  - 11-15: 3 and 4-key combinations
-- **Observation Space**: 60-dimensional normalized state vector (body part positions, angles, velocities)
-- **Rewards**: Based on forward progress, with penalties for time and falling
-
-### Environment Options
-- `stat_in_browser=True`: Display statistics in browser
-- `auto_draw=True`: Automatically render each frame
-- `reduced_action_set=True`: Use only 9 non-redundant actions
-
-## Development
-
-To deactivate the virtual environment:
-
-```bash
-deactivate
-```
-
-## Reference
-
-This project is based on:
-- **qwop-gym**: https://github.com/smanolloff/qwop-gym
-- **QWOP-RL Reference**: Included in `QWOP-RL-Reference/` directory
-
-## Notes
-
-- Python 3.8+ required
-- Ensure virtual environment is activated when working
-- The browser window will open automatically when creating the environment
-- Use Ctrl+C to stop training/testing
+## Future Direction
+- A lot of resources we were refering faced the same problem of "knee scraping". Several of them turned to "Imitation learning" to encourage the model to learn to "stride". So that can be a promising future direction which will benefit the model to learn the fastest way to beat QWOP!
