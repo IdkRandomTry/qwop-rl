@@ -40,25 +40,27 @@ We chose Proximal Policy Optimization, an actor-critic policy gradient method, a
 
 **Baseline Implementation with Stable-Baselines3:**
 
-We initially implemented PPO using the Stable-Baselines3 library (see [playground.ipynb](My-RL/playground.ipynb)). The agent showed promising behavior and learned basic forward movement strategies. You can see an early result in [showcase.ipynb](My-RL/showcase.ipynb).
+We initially implemented PPO using the Stable-Baselines3 library. The agent showed promising behavior and learned basic forward movement strategies. You can see an early result in [showcase.ipynb](My-RL/showcase.ipynb).
 
 **Training Paradigm Shift: Episodes → Steps:**
 
-During training, we encountered a important insight. Training for a fixed number of episodes proved inefficient because QWOP is highly failure-prone. Many episodes ended within seconds, providing minimal learning signal. Hence we shifted to training for a fixed number of steps instead, where each step represents a single state-action-reward transition. This approach provided a much more direct and consistent measure of learning progress, as every step contributed equally to the training data regardless of episode length.
+During training, we encountered a important insight. Training for a fixed number of episodes proved inefficient because QWOP is highly failure-prone. Many episodes ended within seconds, providing minimal learning signal. Hence we shifted to training for a fixed number of steps instead, where each step represents a single state-action-reward transition. This approach provided a much more direct and consistent measure of learning progress, as every step contributed equally to the training data regardless of episode length. A similar approach is by setting the training time, as it is a better estimator of learning than episode count.
+
+You can see the implementation in [ppo_train.ipynb](My-RL/ppo_train.ipynb)
 
 **Custom PPO Implementation:**
 
-Building on theoretical foundations from our coursework, we implemented our own PPO algorithm from scratch (check out [train_ppo.py](My-RL/train_ppo.py)). This custom implementation **successfully trained an agent that consistently reaches the finish line**! You can watch it in action below:
+Building on theoretical foundations from our coursework, we implemented our own PPO algorithm from scratch (check out [train_ppo.py](My-RL/train_ppo.py) and [custom_ppo_train.ipynb](My-RL/custom_ppo_train.ipynb)). This custom implementation **successfully trained an agent that consistently reaches the finish line**! You can watch it in action below:
 
 [![QWOP PPO Demo](https://img.youtube.com/vi/VlHlnPoo1eE/0.jpg)](https://youtu.be/VlHlnPoo1eE)
 
 *Note: While our custom PPO outperformed the Stable-Baselines3 version, this is likely because we trained it for significantly more steps. Both implementations are theoretically sound!*
 
 ## Double QN
-Not done yet
+- still to do
 
 ## Deep QN 
-Not done yet
+- still to do
 
 ## The "Knee Scraping" Problem
 
@@ -132,3 +134,17 @@ Learning about and incorporating imitation learning is a promising direction. We
 3. **Fine-tune with RL** to optimize performance beyond human-level play while maintaining the learned striding mechanics
 
 By combining the strengths of both paradigms: human intuition about biomechanics and RL's optimization power, we hope to train agents that not only complete QWOP efficiently but do so in a way that resembles actual running rather than emergent exploits of the physics engine.
+
+## References/Similar Projects
+
+### Game
+- **QWOP** - Bennett Foddy's original browser game: http://www.foddy.net/Athletics.html
+
+### Libraries & Tools
+- **qwop-gym** - Gymnasium wrapper for QWOP: https://github.com/smanolloff/qwop-gym
+- **Stable-Baselines3** - Reliable RL implementations in PyTorch: https://stable-baselines3.readthedocs.io/
+- **Gymnasium Documentation** - Standard API for RL environments: https://gymnasium.farama.org/
+
+### Similar Projects & Inspiration
+- **QWOP AI (juanto121)** - RL implementation exploring similar challenges: https://github.com/juanto121/qwop-ai
+- **"Achieving Human-Level Performance in QWOP"** - Medium article on RL and imitation learning approaches: https://medium.com/data-science/achieving-human-level-performance-in-qwop-using-reinforcement-learning-and-imitation-learning-81b0a9bbac96
