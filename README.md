@@ -39,7 +39,7 @@ Common in a lot of resources we referred.
 What to do?
 
 ## Penalty for Low Torso
-<video controls src="QWOP-Trying to Stand.mp4" title="Title"></video>
+<video controls src="Media/QWOP-Trying to Stand.mp4" title="Title"></video>
 A "patch" for encouraging the model to learn to "stride" was to impose a penalty when the torso is below a threshold. The penalty was a ReLU function of the models torso_y level. This encouraged the model to stand up but resulted in early terminations and terrible starting moves (failure at ~0m)
 
 ## Custom Rewards
