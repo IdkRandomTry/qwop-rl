@@ -1,9 +1,3 @@
-"""PPO components and utilities for the QWOP environment.
-
-This module provides reusable PPO classes and functions that can be imported
-into notebooks or scripts for training and evaluation.
-"""
-
 from __future__ import annotations
 
 import time
