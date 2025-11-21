@@ -96,7 +96,7 @@ This seemed logical: if the agent gets penalized for having a low torso, it shou
 
 ### The Mixed Result
 
-![Attempting to stand upright](Media/From the Medium Blog.gif)
+![Attempting to stand upright](<Media/QWOP trying to stand.gif>)
 
 The torso penalty did accomplish one thing: **the agen atleast tried to keeping its torso elevated**. However, this created new problems:
 
