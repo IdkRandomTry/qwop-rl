@@ -24,7 +24,7 @@ Why PPO? Continuous input and discrete output.
 
 We used PPO by using the stable baseline library you can find the training cod [here](My-RL/playground.ipynb). It performed decently. You can see the result in the first cell of [showcase.ipynb](My-RL/showcase.ipynb). We noticed an interesting issue. We trained the model for some 'n' episodes. However due to the failure prone nature of the game, the model did not learn a lot from many episodes. Hence we decided to train the model for 'n' steps as a step (or a play) is a much more direct indicator of much a model has "learnt". We also implemented our own PPO algorithm. It performed better than the stable baseline's PPO reaching the finish line consistently! (NOTE: A likely reason is that we trained the custor PPO algorithm for longer :P). 
 
-[![QWOP PPO Demo](https://img.youtube.com/vi/Yu4fOUY4Cc0/0.jpg)](https://www.youtube.com/watch?v=Yu4fOUY4Cc0)
+[![QWOP PPO Demo](https://img.youtube.com/vi/VlHlnPoo1eE/0.jpg)](https://youtu.be/VlHlnPoo1eE)
 
 ## Double QN
 Not done yet
