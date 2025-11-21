@@ -6,6 +6,8 @@
 
 This unique challenge made QWOP an ideal test game for our RL exploration. The game's deceptively simple objective (run 100 meters) combined with its complex, continuous physics and counterintuitive control scheme creates a rich learning environment for RL algorithms. What better way to validate our understanding of reinforcement learning than to tackle a problem where human intuition provides little advantage?
 
+Consolidated results of our best models are in [showcase.ipynb](My-RL/showcase.ipynb)
+
 ## Gymnasium Wrapper for QWOP
 
 To train RL agents on QWOP, we leveraged the [qwop-gym](https://github.com/smanolloff/qwop-gym) wrapper, which provides a standardized Gymnasium (formerly OpenAI Gym) interface for the browser-based game. Gymnasium is the standard API for reinforcement learning environments, offering a consistent interface for agents to interact with diverse tasks—from classic control problems to complex simulations.
