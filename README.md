@@ -85,9 +85,9 @@ The default reward function `(distance / time) - time_penalty` encourages forwar
 
 How do we encourage the agent to learn proper striding mechanics rather than settling for this crawling behavior? This question drove our subsequent experimentation with reward shaping and custom reward functions.
 
-## Reward Shaping: Penalizing Low Torso Height
+## Reward Shaping
 
-### Initial Approach
+### Initial Approach: Low torso level penalty
 
 Our attempt at "patching" the knee scraping problem was straightforward: **penalize the agent when its torso drops too low**. We modified the reward function to include a penalty proportional to how far below a threshold the torso's y-coordinate fell, implemented as:
 
@@ -112,9 +112,37 @@ The torso penalty did accomplish one thing: **the agen atleast tried to keeping 
 
 This experiment revealed an important lesson in reward shaping: **straightforward penalties can create new failure modes rather than solving the underlying problem**. Is there a more elegant reward system to make the agent stride?
 
-<!-- ## Custom Rewards
-The above modification in the reward was a "patch" and did not go deep into understanding how the existing reward system works and if we could engineer a better reward system to encourage the model to stride. We noticed that the environment provided us with a lot off information which was not being used to its full potential. Hence we tried some custom reward functions!
--Still to do -->
+## Custom Rewards
+
+The above modification in the reward was a "patch" and did not go deep into understanding how the existing reward system works and if we could engineer a better reward system to encourage the model to stride. We noticed that the environment provided us with a lot of information which was not being used to its full potential. Hence we tried some custom reward functions!
+
+### Stride Reward: Encouraging Limb Coordination
+
+Instead of penalizing undesirable behavior (low torso), we tried **rewarding desirable behavior**: proper limb coordination that resembles striding. The insight which drove us was that the environment provides detailed positional information for all body parts—head, torso, left leg, and right leg—which we could leverage to detect coordinated movement.
+
+Our custom reward function, implemented in [custom_ppo_custom_reward2.ipynb](My-RL/custom_ppo_custom_reward2.ipynb), adds a stride bonus. The bonus is the product of the x coordinates of the head, torso and the leg which is behind. The leg which is ahead does not contribute to this bonus. Hence the agent should be motivated to move the leg which is behind to the front.
+
+```python
+stride_reward = obs[self.head_x_idx]*obs[self.torso_x_idx]
+if obs[self.left_leg_x_idx] < obs[self.right_leg_x_idx]:
+    stride_reward = stride_reward * obs[self.left_leg_x_idx]
+else:
+    stride_reward = stride_reward * obs[self.right_leg_x_idx]
+```
+
+### The Rationale
+
+This multiplicative reward structure encourages:
+- **Coordinated movement:** The multiplication means the reward is maximized when all parts are well-coordinated and moving forward together. Focusing on the trailing leg promotes the alternate movement of legs which is seen in striding
+
+### The Result
+
+![alt text](Media/CustomReward2.gif)
+
+While this approach showed promise in encouraging more coordinated limb movements, it ultimately faced similar challenges:
+- **Complexity of the task:** Teaching proper striding purely through reward engineering proved difficult
+- **Trade-off tuning:** Finding the right balance between stride reward and distance reward will require hyperparameter search
+- **Still no breakthrough:** The agent still reverted to crawling-like strategies when they proved more stable
 
 ## Future Directions
 
