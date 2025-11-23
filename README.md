@@ -57,12 +57,12 @@ Building on theoretical foundations from our coursework, we implemented our own 
 [![QWOP PPO Demo](https://img.youtube.com/vi/VlHlnPoo1eE/0.jpg)](https://youtu.be/VlHlnPoo1eE)
 
 *Note: While our custom PPO outperformed the Stable-Baselines3 version, this is likely because we trained it for significantly more steps. Both implementations are theoretically sound!*
-
+<!-- 
 ## Double QN
 - still to do
 
 ## Deep QN 
-- still to do
+- still to do -->
 
 ## The "Knee Scraping" Problem
 
@@ -112,9 +112,9 @@ The torso penalty did accomplish one thing: **the agen atleast tried to keeping 
 
 This experiment revealed an important lesson in reward shaping: **straightforward penalties can create new failure modes rather than solving the underlying problem**. Is there a more elegant reward system to make the agent stride?
 
-## Custom Rewards
+<!-- ## Custom Rewards
 The above modification in the reward was a "patch" and did not go deep into understanding how the existing reward system works and if we could engineer a better reward system to encourage the model to stride. We noticed that the environment provided us with a lot off information which was not being used to its full potential. Hence we tried some custom reward functions!
--Still to do
+-Still to do -->
 
 ## Future Directions
 
