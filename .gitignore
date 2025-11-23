@@ -50,11 +50,11 @@ wandb/
 
 # Models (large files)
 models/
-*.zip
+#*.zip
 *.h5
 *.pkl
 *.pth
-*.pt
+# *.pt
 *.ckpt
 
 # Pretrained data (can be large)
